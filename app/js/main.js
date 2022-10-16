@@ -11,7 +11,9 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/slider */ "./src/js/components/slider.js");
 /* harmony import */ var _components_scroller__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/scroller */ "./src/js/components/scroller.js");
-/* harmony import */ var _components_scroller__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_components_scroller__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _components_burger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/burger */ "./src/js/components/burger.js");
+/* harmony import */ var _components_burger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_burger__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -146,11 +148,38 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./src/js/components/burger.js":
+/*!*************************************!*\
+  !*** ./src/js/components/burger.js ***!
+  \*************************************/
+/***/ (() => {
+
+const burger = document.querySelector('[data-burger]');
+const cont = document.querySelector(".container");
+console.log(cont);
+console.log("111");
+function openMenu() {
+  cont.classList.add("container_burger-active");
+}
+function closeMenu() {
+  cont.classList.remove("container_burger-active");
+}
+burger.addEventListener("click", e => {
+  openMenu();
+});
+
+/***/ }),
+
 /***/ "./src/js/components/scroller.js":
 /*!***************************************!*\
   !*** ./src/js/components/scroller.js ***!
   \***************************************/
-/***/ (() => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var swiped_events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiped-events */ "./node_modules/swiped-events/src/swiped-events.js");
+/* harmony import */ var swiped_events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(swiped_events__WEBPACK_IMPORTED_MODULE_0__);
 
 let pages = document.querySelectorAll(".content-list__page");
 let navbar = document.querySelectorAll(".side-nav__list li");
@@ -180,33 +209,47 @@ function showPage(page) {
 }
 // sleep(2000).then(() => { console.log("мир"); });
 
+function scrollDown() {
+  scrollAllowing = false;
+  let cp = currentPage;
+  hidePage(pages[cp]);
+  setTimeout(() => {
+    showPage(pages[cp + 1]);
+  }, 501);
+  setNav(cp, cp + 1);
+  setTimeout(() => {
+    scrollAllowing = true;
+  }, 750);
+  currentPage++;
+}
+function scrollUp() {
+  scrollAllowing = false;
+  let cp = currentPage;
+  hidePage(pages[cp]);
+  setTimeout(() => {
+    showPage(pages[cp - 1]);
+  }, 501);
+  setNav(cp, cp - 1);
+  setTimeout(() => {
+    scrollAllowing = true;
+  }, 750);
+  currentPage--;
+}
 document.addEventListener("wheel", e => {
   e.preventDefault();
   if (e.deltaY < 0 && scrollAllowing && currentPage != 0 && scrollAllowing) {
-    scrollAllowing = false;
-    let cp = currentPage;
-    hidePage(pages[cp]);
-    setTimeout(() => {
-      showPage(pages[cp - 1]);
-    }, 501);
-    setNav(cp, cp - 1);
-    setTimeout(() => {
-      scrollAllowing = true;
-    }, 750);
-    currentPage--;
+    scrollUp();
   }
   if (e.deltaY > 0 && scrollAllowing && currentPage != 1 && scrollAllowing) {
-    scrollAllowing = false;
-    let cp = currentPage;
-    hidePage(pages[cp]);
-    setTimeout(() => {
-      showPage(pages[cp + 1]);
-    }, 501);
-    setNav(cp, cp + 1);
-    setTimeout(() => {
-      scrollAllowing = true;
-    }, 750);
-    currentPage++;
+    scrollDown();
+  }
+});
+document.addEventListener('swiped', function (e) {
+  if (e.detail.dir == "down" && scrollAllowing && currentPage != 0 && scrollAllowing) {
+    scrollUp();
+  }
+  if (e.detail.dir == "up" && scrollAllowing && currentPage != 1 && scrollAllowing) {
+    scrollDown();
   }
 });
 
@@ -226,9 +269,19 @@ swiper__WEBPACK_IMPORTED_MODULE_0__["default"].use([swiper__WEBPACK_IMPORTED_MOD
 const swiper = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](`.swiper`, {
   slidesPerView: 3,
   centeredSlides: true,
-  spaceBetween: 30,
+  spaceBetween: 1,
   speed: 500,
-  grabCursor: true
+  grabCursor: true,
+  breakpoints: {
+    320: {
+      slidesPerView: 2,
+      spaceBetween: 1
+    },
+    576: {
+      slidesPerView: 3,
+      spaceBetween: 1
+    }
+  }
 });
 
 /***/ }),
@@ -518,6 +571,173 @@ if (typeof document !== 'undefined') {
   // coordination is required to use the polyfill in the top-level document:
   applyFocusVisiblePolyfill(document);
 }
+
+/***/ }),
+
+/***/ "./node_modules/swiped-events/src/swiped-events.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/swiped-events/src/swiped-events.js ***!
+  \*********************************************************/
+/***/ (() => {
+
+/*!
+ * swiped-events.js - v@version@
+ * Pure JavaScript swipe events
+ * https://github.com/john-doherty/swiped-events
+ * @inspiration https://stackoverflow.com/questions/16348031/disable-scrolling-when-touch-moving-certain-element
+ * @author John Doherty <www.johndoherty.info>
+ * @license MIT
+ */
+(function (window, document) {
+
+    'use strict';
+
+    // patch CustomEvent to allow constructor creation (IE/Chrome)
+    if (typeof window.CustomEvent !== 'function') {
+
+        window.CustomEvent = function (event, params) {
+
+            params = params || { bubbles: false, cancelable: false, detail: undefined };
+
+            var evt = document.createEvent('CustomEvent');
+            evt.initCustomEvent(event, params.bubbles, params.cancelable, params.detail);
+            return evt;
+        };
+
+        window.CustomEvent.prototype = window.Event.prototype;
+    }
+
+    document.addEventListener('touchstart', handleTouchStart, false);
+    document.addEventListener('touchmove', handleTouchMove, false);
+    document.addEventListener('touchend', handleTouchEnd, false);
+
+    var xDown = null;
+    var yDown = null;
+    var xDiff = null;
+    var yDiff = null;
+    var timeDown = null;
+    var startEl = null;
+
+    /**
+     * Fires swiped event if swipe detected on touchend
+     * @param {object} e - browser event object
+     * @returns {void}
+     */
+    function handleTouchEnd(e) {
+
+        // if the user released on a different target, cancel!
+        if (startEl !== e.target) return;
+
+        var swipeThreshold = parseInt(getNearestAttribute(startEl, 'data-swipe-threshold', '20'), 10); // default 20px
+        var swipeTimeout = parseInt(getNearestAttribute(startEl, 'data-swipe-timeout', '500'), 10);    // default 500ms
+        var timeDiff = Date.now() - timeDown;
+        var eventType = '';
+        var changedTouches = e.changedTouches || e.touches || [];
+
+        if (Math.abs(xDiff) > Math.abs(yDiff)) { // most significant
+            if (Math.abs(xDiff) > swipeThreshold && timeDiff < swipeTimeout) {
+                if (xDiff > 0) {
+                    eventType = 'swiped-left';
+                }
+                else {
+                    eventType = 'swiped-right';
+                }
+            }
+        }
+        else if (Math.abs(yDiff) > swipeThreshold && timeDiff < swipeTimeout) {
+            if (yDiff > 0) {
+                eventType = 'swiped-up';
+            }
+            else {
+                eventType = 'swiped-down';
+            }
+        }
+
+        if (eventType !== '') {
+
+            var eventData = {
+                dir: eventType.replace(/swiped-/, ''),
+                touchType: (changedTouches[0] || {}).touchType || 'direct',
+                xStart: parseInt(xDown, 10),
+                xEnd: parseInt((changedTouches[0] || {}).clientX || -1, 10),
+                yStart: parseInt(yDown, 10),
+                yEnd: parseInt((changedTouches[0] || {}).clientY || -1, 10)
+            };
+
+            // fire `swiped` event event on the element that started the swipe
+            startEl.dispatchEvent(new CustomEvent('swiped', { bubbles: true, cancelable: true, detail: eventData }));
+
+            // fire `swiped-dir` event on the element that started the swipe
+            startEl.dispatchEvent(new CustomEvent(eventType, { bubbles: true, cancelable: true, detail: eventData }));
+        }
+
+        // reset values
+        xDown = null;
+        yDown = null;
+        timeDown = null;
+    }
+
+    /**
+     * Records current location on touchstart event
+     * @param {object} e - browser event object
+     * @returns {void}
+     */
+    function handleTouchStart(e) {
+
+        // if the element has data-swipe-ignore="true" we stop listening for swipe events
+        if (e.target.getAttribute('data-swipe-ignore') === 'true') return;
+
+        startEl = e.target;
+
+        timeDown = Date.now();
+        xDown = e.touches[0].clientX;
+        yDown = e.touches[0].clientY;
+        xDiff = 0;
+        yDiff = 0;
+    }
+
+    /**
+     * Records location diff in px on touchmove event
+     * @param {object} e - browser event object
+     * @returns {void}
+     */
+    function handleTouchMove(e) {
+
+        if (!xDown || !yDown) return;
+
+        var xUp = e.touches[0].clientX;
+        var yUp = e.touches[0].clientY;
+
+        xDiff = xDown - xUp;
+        yDiff = yDown - yUp;
+    }
+
+    /**
+     * Gets attribute off HTML element or nearest parent
+     * @param {object} el - HTML element to retrieve attribute from
+     * @param {string} attributeName - name of the attribute
+     * @param {any} defaultValue - default value to return if no match found
+     * @returns {any} attribute value or defaultValue
+     */
+    function getNearestAttribute(el, attributeName, defaultValue) {
+
+        // walk up the dom tree looking for data-action and data-trigger
+        while (el && el !== document.documentElement) {
+
+            var attributeValue = el.getAttribute(attributeName);
+
+            if (attributeValue) {
+                return attributeValue;
+            }
+
+            el = el.parentNode;
+        }
+
+        return defaultValue;
+    }
+
+}(window, document));
+
 
 /***/ }),
 

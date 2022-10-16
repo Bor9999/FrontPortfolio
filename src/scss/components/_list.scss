@@ -1,21 +1,20 @@
 
 .main-content {
-  perspective: 1500px;
-}
-.main-content__perspective{
   display: flex;
   align-items: center;
   min-height: 94%;
 }
-.main-content__perspective_active{
-  transform: translateZ(-1800px) translateX(-30%) rotateY(45deg);
-  outline: 20px solid var(--blue-color);
-}
 .side-nav{
-
-  border-left: 1px solid rgba(#555, 0.7);
-  height: 650px;
+  @media (max-width: (1181px)) {
+    display: none;
+  }
+  display: flex;
+  align-items: center;
+  height: 100%;
   width: 100px;
+  position: absolute;
+  left: 40px;
+  top: 0;
 
   .side-nav__list{
     margin: 0;
@@ -23,9 +22,9 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    max-height: 100%;
-    min-height: 100%;
+    height: 66%;
     padding: 50px 0px;
+    border-left: 1px solid rgba(#555, 0.7);
   li{
     color: var(--light-color);
     margin-left: 14px;
@@ -89,25 +88,36 @@ li:nth-child(5)::before {
     display: none;
     opacity: 0;
     transition: all 0.5s ease-in-out;
-
+    width: 900px;
+    @media (max-width: (900px)) {
+      width: 100%;
+    }
     .home{
-      width: 900px;
+
       h1{
         color:var(--light-color);
         text-align: center;
         font-size: 68px;
         font-weight: 800;
         line-height: 1;
+        @include tablet{
+          font-size: 55px;
+        }
+        @include small-tablet{
+          font-size: 44px;
+        }
       }
 
     .home__intro{
       display: flex;
       position: relative;
+      align-items: center;
+      justify-content: center;
       &::before{
         position: absolute;
         content: "";
         background-color: var(--gray-color);
-        width: 900px;
+        width: 100%;
         height: 2px;
         bottom: 5px;
         left: 0px;
@@ -121,12 +131,24 @@ li:nth-child(5)::before {
         bottom: 4px;
         left: 20px;
       }
-
+      img{
+        @include mobile{
+          display: none;
+        }
+      }
     }
     .home__msg{
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
       grid-gap: 50px;
+      padding:0 15px;
+       @include small-tablet{
+        grid-template-columns: 1fr;
+        grid-gap: 30px;
+      }
+       @include mobile{
+        grid-gap: 20px;
+       }
       .msg__txt{
 
         h3,p{
@@ -135,9 +157,11 @@ li:nth-child(5)::before {
           color: #282828;
           font-weight: 700;
           transition: color 0.4s ease-in-out;
+          margin: 0;
         }
         h3{
           font-size: 16px;
+          margin: 15px 0;
         }
         &:hover {
           h3,p{
@@ -146,41 +170,42 @@ li:nth-child(5)::before {
       }
       }
     }
-
-  }
+    }
     .swiper{
-      width: 1200px;
       .swiper-wrapper{
         display: flex;
         align-items: center;
         .swiper-slide{
-          filter: blur(3px);
-          transition: filter 0.4s ease-in-out;
+          // filter: blur(3px);
+          transform: scale(0.8);
+          transition: all 0.4s ease-in-out;
+          width: 300px;
           .swiper-slide__container{
             border-radius: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            width: 350px;
             border: 2px solid rgba(#555, 0.7);
-            transform: scale(0.8);
+            width: 100%;
             transition: transform 0.4s ease-in-out;
             img{
-
               height: 250px;
+              @include mobile{
+                height: 150px;
+              }
             }
               h3{
               text-align: center;
               color: var(--light-color);
               font-weight: 600;
               font-size: 25px;
+              margin: 10px 0;
+              @include mobile{
+                font-size: 16px;
+              }
               }
             .swiper-slide__descr{
             border-top: 1px solid rgba(#555, 0.7);
-
-
-
-
             p {
               margin: 0;
               padding: 15px;
@@ -192,14 +217,11 @@ li:nth-child(5)::before {
         }
         }
         .swiper-slide-active{
-          filter: none;
-          .swiper-slide__container{
-            transform: scale(1);
-          }
+          // filter: none;
+          transform: scale(1);
         }
       }
     }
-
   }
   .content-list__page_active{
     display: block;
@@ -208,3 +230,5 @@ li:nth-child(5)::before {
     opacity: 1;
   }
 }
+
+

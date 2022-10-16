@@ -1,7 +1,12 @@
+import 'swiped-events';
+
+
+
 let pages = document.querySelectorAll(".content-list__page");
 let navbar = document.querySelectorAll(".side-nav__list li");
 let scrollAllowing = true;
 let currentPage = 0;
+
 
 
 // function sleep(ms) {
@@ -24,10 +29,16 @@ function showPage(page){
 }
 // sleep(2000).then(() => { console.log("мир"); });
 
-document.addEventListener("wheel", (e) => {
- e.preventDefault();
-  if(e.deltaY < 0 && scrollAllowing && (currentPage!=0) && scrollAllowing){
-
+function scrollDown(){
+  scrollAllowing =false;
+    let cp = currentPage;
+    hidePage(pages[cp]);
+    setTimeout(()=>{showPage(pages[cp+1]);},501);
+    setNav(cp,cp+1);
+    setTimeout(()=>{scrollAllowing =true;},750);
+    currentPage++;
+}
+function scrollUp(){
     scrollAllowing =false;
     let cp = currentPage;
     hidePage(pages[cp]);
@@ -35,18 +46,23 @@ document.addEventListener("wheel", (e) => {
     setNav(cp,cp-1);
     setTimeout(()=>{scrollAllowing =true;},750);
     currentPage--;
-
+}
+document.addEventListener("wheel", (e) => {
+ e.preventDefault();
+  if(e.deltaY < 0 && scrollAllowing && (currentPage!=0) && scrollAllowing){
+    scrollUp();
 }
  if(e.deltaY > 0 && scrollAllowing && (currentPage!=1)&& scrollAllowing){
-
-    scrollAllowing =false;
-    let cp = currentPage;
-    hidePage(pages[cp]);
-    setTimeout(()=>{showPage(pages[cp+1]);},501);
-    setNav(cp,cp+1);
-    setTimeout(()=>{scrollAllowing =true;},750);
-    currentPage++;
-
+    scrollDown();
 }
 });
+document.addEventListener('swiped', function(e) {
+  if(e.detail.dir =="down" && scrollAllowing && (currentPage!=0) && scrollAllowing){
+    scrollUp();
+}
+ if(e.detail.dir =="up" && scrollAllowing && (currentPage!=1)&& scrollAllowing){
+    scrollDown();
+}
+});
+
 

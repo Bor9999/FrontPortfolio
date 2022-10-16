@@ -86,6 +86,8 @@ a {
   padding: 0 var(--container-offset);
   max-width: var(--container-width);
   height: 100vh;
+  position: relative;
+  transition: all 0.3s ease-in-out;
 }
 
 .js-focus-visible :focus:not(.focus-visible) {
