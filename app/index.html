@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru" class="page">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#111111">
+  <title>Portfolio</title>
+  <link rel="preload" href="fonts/MontserratRegular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/MontserratBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/MontserratSemiBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/MontserratExtraBold.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="css/vendor.css">
+  <link rel="stylesheet" href="css/main.css">
+  <script defer src="js/main.js"></script>
+</head>
+
+
+<body class="page__body">
+
+  <div class="container">
+    <header class="header">
+  <a href="#" class="header__logo"><img loading="lazy" src="/img/logo.png" width="30" height="28" alt="logo">
+    <span>Global</span></a>
+    <a href="" class="btn is-hidden">Hire Us</a>
+    <button class="burger" aria-label="Открыть меню" aria-expanded="false"  data-burger>
+      <span class="burger__line"></span>
+    </button>
+</header>
+
+
+    <div class="main-content" onmousedown="return false" onselectstart="return false">
+  <div class="main-content__perspective main-content__perspective_active">
+  <nav class="side-nav">
+    <ul class="side-nav__list">
+      <li class="active"><span>Home</span></li>
+      <li><span>Slider</span></li>
+      <li><span>Home</span></li>
+      <li><span>Home</span></li>
+      <li><span>Home</span></li>
+    </ul>
+  </nav>
+  <ul class="content-list">
+    <li class="content-list__page content-list__page_active content-list__page_shown">
+      <section class="home">
+        <div class="home__intro">
+          <h1>Welcome to the <br> WebSite!</h1>
+        <picture>
+          <source srcset="img/introduction-visual.avif" type="image/avif">
+          <source srcset="img/introduction-visual.webp" type="image/webp">
+          <img loading="lazy" src="img/introduction-visual.png" class="image" alt="">
+        </picture>
+        </div>
+        <div class="home__msg">
+          <div class="msg__txt">
+            <h3>Interactive design</h3>
+            <p>The site was created with the idea of interactive design to demonstrate the capabilities of the developer</p>
+          </div>
+          <div class="msg__txt">
+            <h3>Adaptive Layout</h3>
+            <p>The site has Adaptive Layout to demonstrate the capabilities of the developer</p>
+          </div>
+          <div class="msg__txt">
+            <h3>Interactive design</h3>
+            <p>The site was created with the idea of interactive design to demonstrate the capabilities of the developer</p>
+          </div>
+        </div>
+      </section>
+    </li>
+    <li class="content-list__page">
+      <div class="swiper">
+        <div class="swiper-wrapper">
+           <div class="swiper-slide">
+              <div class="swiper-slide__container">
+                <picture>
+                  <source srcset="img/shp1.avif" type="image/avif">
+                  <source srcset="img/shp1.webp" type="image/webp">
+                  <img loading="lazy" src="img/shp1.png" class="image" alt="spaceship">
+                </picture>
+                <h3>Star Destroyer</h3>
+                <div class="swiper-slide__descr">
+                <p>A Star Destroyer was a dagger-shaped type of capital ship that were used by the Galactic Republic, the Galactic Empire, the First Order, and the Sith Eternal. Notable examples of Star Destroyers include the Imperial-class Star Destroyer and its predecessor, the Venator-class Star Destroyer.</p>
+                </div>
+              </div>
+           </div>
+           <div class="swiper-slide">
+            <div class="swiper-slide__container">
+              <picture>
+                <source srcset="img/shp2.avif" type="image/avif">
+                <source srcset="img/shp2.webp" type="image/webp">
+                <img loading="lazy" src="img/shp2.png" class="image" alt="spaceship">
+              </picture>
+              <h3>Spaceship №2</h3>
+              <div class="swiper-slide__descr">
+              <p>A Star Destroyer was a dagger-shaped type of capital ship that were used by the Galactic Republic, the Galactic Empire, the First Order, and the Sith Eternal. Notable examples of Star Destroyers include the Imperial-class Star Destroyer and its predecessor, the Venator-class Star Destroyer.</p>
+              </div>
+            </div>
+         </div>
+         <div class="swiper-slide">
+          <div class="swiper-slide__container">
+            <picture>
+              <source srcset="img/shp3.avif" type="image/avif">
+              <source srcset="img/shp3.webp" type="image/webp">
+              <img loading="lazy" src="img/shp3.png" class="image" alt="spaceship">
+            </picture>
+            <h3>Spaceship №1</h3>
+            <div class="swiper-slide__descr">
+            <p>A Star Destroyer was a dagger-shaped type of capital ship that were used by the Galactic Republic, the Galactic Empire, the First Order, and the Sith Eternal. Notable examples of Star Destroyers include the Imperial-class Star Destroyer and its predecessor, the Venator-class Star Destroyer.</p>
+            </div>
+          </div>
+       </div>
+       <div class="swiper-slide">
+        <div class="swiper-slide__container">
+          <picture>
+            <source srcset="img/shp4.avif" type="image/avif">
+            <source srcset="img/shp4.webp" type="image/webp">
+            <img loading="lazy" src="img/shp4.png" class="image" alt="spaceship">
+          </picture>
+          <h3>Spaceship №1</h3>
+          <div class="swiper-slide__descr">
+          <p>A Star Destroyer was a dagger-shaped type of capital ship that were used by the Galactic Republic, the Galactic Empire, the First Order, and the Sith Eternal. Notable examples of Star Destroyers include the Imperial-class Star Destroyer and its predecessor, the Venator-class Star Destroyer.</p>
+          </div>
+        </div>
+     </div>
+
+        </div>
+      </div>
+    </li>
+  </ul>
+  </div>
+</div>
+
+  </div>
+
+
+
+    
+    
+
+</body>
+
+</html>

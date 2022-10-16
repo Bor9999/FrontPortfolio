@@ -1,0 +1,36 @@
+header{
+
+    min-height: 6%;
+    @include flex-all-sb;
+    position: relative;
+
+    .header__logo{
+      @include flex-v-center;
+      img {
+        margin-right: 10px;
+      }
+      span{
+        color: var(--light-color);
+        font-size: 16px;
+        font-weight: 700;
+        text-transform: uppercase;
+      }
+    }
+    .burger{
+      @include burger;
+      color: var(--light-color);
+
+    }
+
+  .btn{
+    padding: 5px 20px;
+    background-color: var(--blue-color);
+    color: var(--light-color);
+    text-decoration: none;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 14px;
+  }
+
+
+}
