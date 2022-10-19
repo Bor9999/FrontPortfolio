@@ -21,21 +21,20 @@
 
   <div class="container">
     <header class="header">
-  <a href="#" class="header__logo"><img loading="lazy" src="/img/logo.png" width="30" height="28" alt="logo">
-    <span>Global</span></a>
+  <a href="#" class="header__logo"><img loading="lazy" src="/img/tele-logo.svg" width="30" height="28" alt="logo">
+    <span>Portfolio</span></a>
     <a href="" class="btn is-hidden">Hire Us</a>
-    <button class="burger" aria-label="Открыть меню" aria-expanded="false"  data-burger>
-      <span class="burger__line"></span>
+    <button class="burger" data-burger>
+      <div class="burger__container"><span class="burger__line"></span></div>
     </button>
 </header>
-
 
     
 <nav class="side-nav">
     <ul class="side-nav__list">
       <li class="active"><span>Home</span></li>
       <li><span>Slider</span></li>
-      <li><span>Home</span></li>
+      <li><span>UI kit</span></li>
       <li><span>Home</span></li>
       <li><span>Home</span></li>
     </ul>
@@ -71,6 +70,8 @@
     </li>
     <li class="content-list__page">
       <div class="swiper">
+        <!-- <div class="swiper__button swiper-button-prev"></div>
+        <div class="swiper__button swiper-button-next"></div> -->
         <div class="swiper-wrapper">
            <div class="swiper-slide">
               <div class="swiper-slide__container">
@@ -128,11 +129,52 @@
         </div>
       </div>
     </li>
+    <li class="content-list__page">
+      <div class="UI-kit__container">
+        <div class="buttons_container">
+          <button class="btnCustom">Hover me!</button>
+          <button class="btnNeon">Neon</button>
+          <button class="btnTranparentNeon">Hover Me!</button>
+          <button class="btnFigure">Hover me!</button>
+        </div>
+        <div class="checkbox__container">
+          <label class="check option">
+            <input class="check__input" type="checkbox" checked>
+            <span class="check__box"></span>
+            First
+          </label>
+          <label class="check option">
+            <input class="check__input" type="checkbox">
+            <span class="check__box"></span>
+            Second
+          </label>
+          <label class="check option">
+            <input class="check__input" type="checkbox" disabled>
+            <span class="check__box"></span>
+            Third
+          </label>
+          <label class="check option">
+            <input class="check__input" type="checkbox" checked disabled>
+            <span class="check__box"></span>
+            Fourth
+          </label>
+        </div>
+        <div class="select" id="select"></div>
+      </div>
+    </li>
   </ul>
 
 </div>
 
+
   </div>
+  <nav class="nav-bar" title="">
+  <ul class="nav__list">
+    <li class="nav__item nav__item_active">Home</li>
+    <li class="nav__item">Slider</li>
+    <li class="nav__item">UI kit</li>
+  </ul>
+</nav>
 
 
 

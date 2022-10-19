@@ -4,3 +4,4 @@ export default {
   htmlEl: document.documentElement,
   bodyEl: document.body,
 }
+

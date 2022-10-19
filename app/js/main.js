@@ -11,8 +11,7 @@
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_slider__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/slider */ "./src/js/components/slider.js");
 /* harmony import */ var _components_scroller__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/scroller */ "./src/js/components/scroller.js");
-/* harmony import */ var _components_burger__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/burger */ "./src/js/components/burger.js");
-/* harmony import */ var _components_burger__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_components_burger__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _components_selector__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/selector */ "./src/js/components/selector.js");
 
 
 
@@ -148,28 +147,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/js/components/burger.js":
-/*!*************************************!*\
-  !*** ./src/js/components/burger.js ***!
-  \*************************************/
-/***/ (() => {
-
-const burger = document.querySelector('[data-burger]');
-const cont = document.querySelector(".container");
-console.log(cont);
-console.log("111");
-function openMenu() {
-  cont.classList.add("container_burger-active");
-}
-function closeMenu() {
-  cont.classList.remove("container_burger-active");
-}
-burger.addEventListener("click", e => {
-  openMenu();
-});
-
-/***/ }),
-
 /***/ "./src/js/components/scroller.js":
 /*!***************************************!*\
   !*** ./src/js/components/scroller.js ***!
@@ -181,19 +158,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiped_events__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiped-events */ "./node_modules/swiped-events/src/swiped-events.js");
 /* harmony import */ var swiped_events__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(swiped_events__WEBPACK_IMPORTED_MODULE_0__);
 
-let pages = document.querySelectorAll(".content-list__page");
-let navbar = document.querySelectorAll(".side-nav__list li");
+const pages = document.querySelectorAll(".content-list__page");
+const navbarSide = document.querySelectorAll(".side-nav__list li");
+const burgerBtn = document.querySelector('[data-burger]');
+const container = document.querySelector(".container");
+const navbarBurgerMenu = document.querySelector(".nav-bar");
+const navbarList = document.querySelector(".nav__list");
+const navbarItems = document.querySelectorAll(".nav__item");
 let scrollAllowing = true;
 let currentPage = 0;
-
-// function sleep(ms) {
-//   return new Promise(resolve => setTimeout(resolve, ms));
-// }
-function setNav(cp, cpNext) {
-  navbar[cp].classList.remove("active");
+function setSideNav(cp, cpNext) {
+  navbarSide[cp].classList.remove("active");
   setTimeout(() => {
-    navbar[cpNext].classList.add("active");
+    navbarSide[cpNext].classList.add("active");
   }, 500);
+}
+function setNav(cp, cpNext) {
+  navbarItems[cp].classList.remove("nav__item_active");
+  navbarItems[cpNext].classList.add("nav__item_active");
 }
 function hidePage(page) {
   page.classList.remove("content-list__page_shown");
@@ -207,8 +189,6 @@ function showPage(page) {
     page.classList.add("content-list__page_shown");
   }, 10);
 }
-// sleep(2000).then(() => { console.log("мир"); });
-
 function scrollDown() {
   scrollAllowing = false;
   let cp = currentPage;
@@ -216,6 +196,7 @@ function scrollDown() {
   setTimeout(() => {
     showPage(pages[cp + 1]);
   }, 501);
+  setSideNav(cp, cp + 1);
   setNav(cp, cp + 1);
   setTimeout(() => {
     scrollAllowing = true;
@@ -229,27 +210,114 @@ function scrollUp() {
   setTimeout(() => {
     showPage(pages[cp - 1]);
   }, 501);
+  setSideNav(cp, cp - 1);
   setNav(cp, cp - 1);
   setTimeout(() => {
     scrollAllowing = true;
   }, 750);
   currentPage--;
 }
+function scrollTo(num) {
+  scrollAllowing = false;
+  let cp = currentPage;
+  hidePage(pages[cp]);
+  setTimeout(() => {
+    showPage(pages[num]);
+  }, 501);
+  setTimeout(() => {
+    scrollAllowing = true;
+  }, 750);
+  currentPage = num;
+}
 document.addEventListener("wheel", e => {
-  e.preventDefault();
-  if (e.deltaY < 0 && scrollAllowing && currentPage != 0 && scrollAllowing) {
+  if (e.deltaY < 0 && scrollAllowing == true && currentPage != 0 && scrollAllowing) {
     scrollUp();
   }
-  if (e.deltaY > 0 && scrollAllowing && currentPage != 1 && scrollAllowing) {
+  if (e.deltaY > 0 && scrollAllowing == true && currentPage != 2 && scrollAllowing) {
     scrollDown();
   }
 });
 document.addEventListener('swiped', function (e) {
-  if (e.detail.dir == "down" && scrollAllowing && currentPage != 0 && scrollAllowing) {
+  if (e.detail.dir == "down" && scrollAllowing == true && currentPage != 0 && scrollAllowing) {
     scrollUp();
   }
-  if (e.detail.dir == "up" && scrollAllowing && currentPage != 1 && scrollAllowing) {
+  if (e.detail.dir == "up" && scrollAllowing == true && currentPage != 2 && scrollAllowing) {
     scrollDown();
+  }
+});
+
+//  Menu
+
+function openMenu() {
+  container.classList.add("container_burger-active");
+  navbarBurgerMenu.classList.add("nav-bar_active");
+  scrollAllowing = false;
+}
+function closeMenu() {
+  navbarBurgerMenu.classList.remove("nav-bar_active");
+  container.classList.remove("container_burger-active");
+  scrollAllowing = true;
+}
+function initNavBar() {
+  navbarList.addEventListener("click", e => {
+    let item = chooseItem(e);
+    setNav(currentPage, item);
+    setSideNav(currentPage, item);
+    scrollTo(item);
+    closeMenu();
+  }, {
+    once: true
+  });
+}
+function chooseItem(e) {
+  let number;
+  for (let i = 0; i < navbarItems.length; i++) {
+    if (e.target == navbarItems[i]) {
+      number = i;
+      break;
+    }
+  }
+  return number;
+}
+burgerBtn.addEventListener("click", e => {
+  openMenu();
+  setTimeout(() => {
+    container.addEventListener("click", e => {
+      closeMenu();
+    }, {
+      once: true
+    });
+    initNavBar();
+  }, 400);
+});
+
+/***/ }),
+
+/***/ "./src/js/components/selector.js":
+/*!***************************************!*\
+  !*** ./src/js/components/selector.js ***!
+  \***************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _vendor_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../vendor/select */ "./src/js/vendor/select.js");
+
+const select = new _vendor_select__WEBPACK_IMPORTED_MODULE_0__.Select('#select', {
+  placeholder: 'Chose element',
+  // selectedId: '2',
+  data: [{
+    id: '1',
+    value: 'First'
+  }, {
+    id: '2',
+    value: 'Second'
+  }, {
+    id: '3',
+    value: 'Third'
+  }],
+  onSelect(item) {
+    console.log('Selected Item', item);
   }
 });
 
@@ -265,7 +333,7 @@ document.addEventListener('swiped', function (e) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var swiper__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! swiper */ "./node_modules/swiper/swiper.esm.js");
 
-swiper__WEBPACK_IMPORTED_MODULE_0__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_0__.Pagination]);
+swiper__WEBPACK_IMPORTED_MODULE_0__["default"].use([swiper__WEBPACK_IMPORTED_MODULE_0__.Navigation]);
 const swiper = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](`.swiper`, {
   slidesPerView: 3,
   centeredSlides: true,
@@ -277,10 +345,14 @@ const swiper = new swiper__WEBPACK_IMPORTED_MODULE_0__["default"](`.swiper`, {
       slidesPerView: 2,
       spaceBetween: 1
     },
-    576: {
+    768: {
       slidesPerView: 3,
       spaceBetween: 1
     }
+  },
+  navigation: {
+    nextEl: '.swiper-button-next',
+    prevEl: '.swiper-button-prev'
   }
 });
 
@@ -570,6 +642,124 @@ if (typeof document !== 'undefined') {
   // Apply the polyfill to the global document, so that no JavaScript
   // coordination is required to use the polyfill in the top-level document:
   applyFocusVisiblePolyfill(document);
+}
+
+/***/ }),
+
+/***/ "./src/js/vendor/select.js":
+/*!*********************************!*\
+  !*** ./src/js/vendor/select.js ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Select": () => (/* binding */ Select)
+/* harmony export */ });
+function _classPrivateMethodInitSpec(obj, privateSet) { _checkPrivateRedeclaration(obj, privateSet); privateSet.add(obj); }
+function _checkPrivateRedeclaration(obj, privateCollection) { if (privateCollection.has(obj)) { throw new TypeError("Cannot initialize the same private elements twice on an object"); } }
+function _classPrivateMethodGet(receiver, privateSet, fn) { if (!privateSet.has(receiver)) { throw new TypeError("attempted to get private field on non-instance"); } return fn; }
+const getTemplate = function () {
+  let data = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+  let placeholder = arguments.length > 1 ? arguments[1] : undefined;
+  let selectedId = arguments.length > 2 ? arguments[2] : undefined;
+  let text = placeholder ?? 'Placeholder по умолчанию';
+  const items = data.map(item => {
+    let cls = '';
+    if (item.id === selectedId) {
+      text = item.value;
+      cls = 'selected';
+    }
+    return `
+      <li class="select__item ${cls}" data-type="item" data-id="${item.id}">${item.value}</li>
+    `;
+  });
+  return `
+    <div class="select__backdrop" data-type="backdrop"></div>
+    <div class="select__input" data-type="input">
+      <span data-type="value">${text}</span>
+      <i class="fa fa-chevron-down" data-type="arrow"></i>
+    </div>
+    <div class="select__dropdown">
+      <ul class="select__list">
+        ${items.join('')}
+      </ul>
+    </div>
+  `;
+};
+var _render = /*#__PURE__*/new WeakSet();
+var _setup = /*#__PURE__*/new WeakSet();
+class Select {
+  constructor(selector, options) {
+    _classPrivateMethodInitSpec(this, _setup);
+    _classPrivateMethodInitSpec(this, _render);
+    this.$el = document.querySelector(selector);
+    this.options = options;
+    this.selectedId = options.selectedId;
+    _classPrivateMethodGet(this, _render, _render2).call(this);
+    _classPrivateMethodGet(this, _setup, _setup2).call(this);
+  }
+  clickHandler(event) {
+    const {
+      type
+    } = event.target.dataset;
+    if (type === 'input') {
+      this.toggle();
+    } else if (type === 'item') {
+      const id = event.target.dataset.id;
+      this.select(id);
+    } else if (type === 'backdrop') {
+      this.close();
+    }
+  }
+  get isOpen() {
+    return this.$el.classList.contains('open');
+  }
+  get current() {
+    return this.options.data.find(item => item.id === this.selectedId);
+  }
+  select(id) {
+    this.selectedId = id;
+    this.$value.textContent = this.current.value;
+    this.$el.querySelectorAll('[data-type="item"]').forEach(el => {
+      el.classList.remove('selected');
+    });
+    this.$el.querySelector(`[data-id="${id}"]`).classList.add('selected');
+    this.options.onSelect ? this.options.onSelect(this.current) : null;
+    this.close();
+  }
+  toggle() {
+    this.isOpen ? this.close() : this.open();
+  }
+  open() {
+    this.$el.classList.add('open');
+    this.$arrow.classList.remove('fa-chevron-down');
+    this.$arrow.classList.add('fa-chevron-up');
+  }
+  close() {
+    this.$el.classList.remove('open');
+    this.$arrow.classList.add('fa-chevron-down');
+    this.$arrow.classList.remove('fa-chevron-up');
+  }
+  destroy() {
+    this.$el.removeEventListener('click', this.clickHandler);
+    this.$el.innerHTML = '';
+  }
+}
+function _render2() {
+  const {
+    placeholder,
+    data
+  } = this.options;
+  this.$el.classList.add('select');
+  this.$el.innerHTML = getTemplate(data, placeholder, this.selectedId);
+}
+function _setup2() {
+  this.clickHandler = this.clickHandler.bind(this);
+  this.$el.addEventListener('click', this.clickHandler);
+  this.$arrow = this.$el.querySelector('[data-type="arrow"]');
+  this.$value = this.$el.querySelector('[data-type="value"]');
 }
 
 /***/ }),
