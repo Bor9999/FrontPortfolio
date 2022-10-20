@@ -223,25 +223,6 @@ li:nth-child(5)::before {
         }
       }
     }
-    // .swiper__button{
-    //   // background-color: #555;
-    //   // width: 50px;
-    //   // height: 50px;
-    //   color: var(--light-color);
-    //   border-radius: 50%;
-    //   &::after{
-    //     font-size: 20px;
-    //   }
-    }
-    // .swiper-button-next{
-    //   // right: 33%;
-    //   // transform: translateX(90%);
-    // }
-    // .swiper-button-prev{
-    //   // left: 33%;
-    //   // transform: translateX(-90%);
-    // }
-  // }
   .UI-kit__container{
     display: grid;
     .buttons_container{
@@ -427,7 +408,7 @@ li:nth-child(5)::before {
 
     $height: 46px;
     .select {
-      width: 100%;
+      width: 300px;
       position: relative;
       z-index: 100;
       color: var(--light-color);
@@ -437,10 +418,12 @@ li:nth-child(5)::before {
       &.open {
         .select__dropdown {
           display: block;
+          border-radius: 0px 0px 20px 20px;
         }
 
         .select__input {
           border-bottom: none;
+          border-radius: 20px 20px 0px 0px;
         }
 
         .select__backdrop {
@@ -450,7 +433,7 @@ li:nth-child(5)::before {
 
       &__input {
         border: 2px solid #555;
-        border-radius: 5px;
+        border-radius: 20px;
         height: $height;
         display: flex;
         align-items: center;
@@ -463,7 +446,7 @@ li:nth-child(5)::before {
         display: none;
         position: absolute;
         border: 2px solid #555;
-        border-radius: 5px;
+        border-radius: 20px;
         top: $height;
         left: 0;
         right: 0;
@@ -503,7 +486,22 @@ li:nth-child(5)::before {
           transition: .15s background-color ease-in;
         }
       }
+      .fa-chevron-down{
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 10px 7.5px 0 7.5px;
+        border-color: var(--blue-color) transparent transparent transparent;
+      }
+      .fa-chevron-up{
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 0 7.5px 10px 7.5px;
+        border-color: transparent transparent var(--blue-color) transparent;
+      }
     }
+  }
   }
   .content-list__page_active{
     display: block;

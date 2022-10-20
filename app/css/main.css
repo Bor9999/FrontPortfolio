@@ -576,11 +576,11 @@ header .btn {
   -ms-transform: scale(1);
   transform: scale(1);
 }
-.content-list .UI-kit__container {
+.content-list .content-list__page .UI-kit__container {
   display: -ms-grid;
   display: grid;
 }
-.content-list .UI-kit__container .buttons_container {
+.content-list .content-list__page .UI-kit__container .buttons_container {
   height: 200px;
   width: 300px;
   border: 2px solid #555;
@@ -593,7 +593,7 @@ header .btn {
   grid-gap: 20px;
   font-size: 15px;
 }
-.content-list .UI-kit__container .buttons_container .btnCustom {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnCustom {
   background-color: transparent;
   margin: 0;
   color: var(--light-color);
@@ -606,7 +606,7 @@ header .btn {
   -o-transition: color 0.2s ease-in-out;
   transition: color 0.2s ease-in-out;
 }
-.content-list .UI-kit__container .buttons_container .btnCustom::before {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnCustom::before {
   content: "";
   z-index: -1;
   width: 75%;
@@ -619,15 +619,15 @@ header .btn {
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
 }
-.content-list .UI-kit__container .buttons_container .btnCustom:hover::before {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnCustom:hover::before {
   width: 100%;
 }
-.content-list .UI-kit__container .buttons_container .btnCustom:active {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnCustom:active {
   -webkit-transform: translateY(2px);
   -ms-transform: translateY(2px);
   transform: translateY(2px);
 }
-.content-list .UI-kit__container .buttons_container .btnNeon {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnNeon {
   font-size: 1rem;
   font-weight: 600;
   display: block;
@@ -643,7 +643,7 @@ header .btn {
   box-shadow: inset 0 0 0.5em 0 var(--blue-color), 0 0 0.5em 0 var(--blue-color);
   position: relative;
 }
-.content-list .UI-kit__container .buttons_container .btnNeon::after {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnNeon::after {
   content: "";
   position: absolute;
   top: 0;
@@ -659,19 +659,19 @@ header .btn {
   -o-transition: opacity 0.2s ease-in-out;
   transition: opacity 0.2s ease-in-out;
 }
-.content-list .UI-kit__container .buttons_container .btnNeon:hover {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnNeon:hover {
   color: var(--dark-color);
   text-shadow: none;
 }
-.content-list .UI-kit__container .buttons_container .btnNeon:hover::after {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnNeon:hover::after {
   opacity: 1;
 }
-.content-list .UI-kit__container .buttons_container .btnNeon:active {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnNeon:active {
   -webkit-transform: translateY(2px);
   -ms-transform: translateY(2px);
   transform: translateY(2px);
 }
-.content-list .UI-kit__container .buttons_container .btnTranparentNeon {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnTranparentNeon {
   padding: 5px;
   background-color: transparent;
   border-radius: 1rem;
@@ -687,16 +687,16 @@ header .btn {
   transition: box-shadow 150ms ease-in-out;
   transition: box-shadow 150ms ease-in-out, -webkit-box-shadow 150ms ease-in-out;
 }
-.content-list .UI-kit__container .buttons_container .btnTranparentNeon:hover {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnTranparentNeon:hover {
   -webkit-box-shadow: 0 0 10px 0 var(--blue-color) inset, 0 0 10px 4px var(--blue-color);
   box-shadow: 0 0 10px 0 var(--blue-color) inset, 0 0 10px 4px var(--blue-color);
 }
-.content-list .UI-kit__container .buttons_container .btnTranparentNeon:active {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnTranparentNeon:active {
   -webkit-transform: translateY(2px);
   -ms-transform: translateY(2px);
   transform: translateY(2px);
 }
-.content-list .UI-kit__container .buttons_container .btnFigure {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnFigure {
   position: relative;
   padding: 5px;
   background-color: transparent;
@@ -707,7 +707,7 @@ header .btn {
   text-transform: uppercase;
   overflow: hidden;
 }
-.content-list .UI-kit__container .buttons_container .btnFigure::before {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnFigure::before {
   width: 200%;
   height: 0%;
   -webkit-transform: translate(-50%, -50%) rotate(45deg);
@@ -723,15 +723,15 @@ header .btn {
   -o-transition: all 0.6s ease;
   transition: all 0.6s ease;
 }
-.content-list .UI-kit__container .buttons_container .btnFigure:hover::before {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnFigure:hover::before {
   height: 380%;
 }
-.content-list .UI-kit__container .buttons_container .btnFigure:active {
+.content-list .content-list__page .UI-kit__container .buttons_container .btnFigure:active {
   -webkit-transform: translateY(2px);
   -ms-transform: translateY(2px);
   transform: translateY(2px);
 }
-.content-list .UI-kit__container .checkbox__container {
+.content-list .content-list__page .UI-kit__container .checkbox__container {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -752,13 +752,13 @@ header .btn {
   font-size: 20px;
   font-weight: 600;
 }
-.content-list .UI-kit__container .checkbox__container .check__input {
+.content-list .content-list__page .UI-kit__container .checkbox__container .check__input {
   position: absolute;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
 }
-.content-list .UI-kit__container .checkbox__container .check__box {
+.content-list .content-list__page .UI-kit__container .checkbox__container .check__box {
   position: absolute;
   margin-top: 0.2em;
   margin-left: -1em;
@@ -772,41 +772,43 @@ header .btn {
   -webkit-box-shadow: 0 0 0 0.1em var(--blue-color);
   box-shadow: 0 0 0 0.1em var(--blue-color);
 }
-.content-list .UI-kit__container .checkbox__container .check__input:checked + .check__box {
+.content-list .content-list__page .UI-kit__container .checkbox__container .check__input:checked + .check__box {
   background-color: var(--blue-color);
   background-image: url(/img/check.svg);
 }
-.content-list .UI-kit__container .checkbox__container .check__input:focus + .check__box {
+.content-list .content-list__page .UI-kit__container .checkbox__container .check__input:focus + .check__box {
   -webkit-box-shadow: 0 0 0 0.1em var(--blue-color), 0 0 0 0.2em #7ED321;
   box-shadow: 0 0 0 0.1em var(--blue-color), 0 0 0 0.2em #7ED321;
 }
-.content-list .UI-kit__container .checkbox__container .check__input:disabled + .check__box {
+.content-list .content-list__page .UI-kit__container .checkbox__container .check__input:disabled + .check__box {
   -webkit-box-shadow: 0 0 0 0.1em #9B9B9B;
   box-shadow: 0 0 0 0.1em #9B9B9B;
 }
-.content-list .UI-kit__container .checkbox__container .check__input:checked:disabled + .check__box {
+.content-list .content-list__page .UI-kit__container .checkbox__container .check__input:checked:disabled + .check__box {
   background-color: #9B9B9B;
 }
-.content-list .UI-kit__container .select {
-  width: 100%;
+.content-list .content-list__page .UI-kit__container .select {
+  width: 300px;
   position: relative;
   z-index: 100;
   color: var(--light-color);
   font-size: 20px;
   font-weight: 600;
 }
-.content-list .UI-kit__container .select.open .select__dropdown {
+.content-list .content-list__page .UI-kit__container .select.open .select__dropdown {
   display: block;
+  border-radius: 0px 0px 20px 20px;
 }
-.content-list .UI-kit__container .select.open .select__input {
+.content-list .content-list__page .UI-kit__container .select.open .select__input {
   border-bottom: none;
+  border-radius: 20px 20px 0px 0px;
 }
-.content-list .UI-kit__container .select.open .select__backdrop {
+.content-list .content-list__page .UI-kit__container .select.open .select__backdrop {
   display: block;
 }
-.content-list .UI-kit__container .select__input {
+.content-list .content-list__page .UI-kit__container .select__input {
   border: 2px solid #555;
-  border-radius: 5px;
+  border-radius: 20px;
   height: 46px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -820,11 +822,11 @@ header .btn {
   padding: 0 1rem;
   cursor: pointer;
 }
-.content-list .UI-kit__container .select__dropdown {
+.content-list .content-list__page .UI-kit__container .select__dropdown {
   display: none;
   position: absolute;
   border: 2px solid #555;
-  border-radius: 5px;
+  border-radius: 20px;
   top: 46px;
   left: 0;
   right: 0;
@@ -833,12 +835,12 @@ header .btn {
   -webkit-box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
   box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
 }
-.content-list .UI-kit__container .select__list {
+.content-list .content-list__page .UI-kit__container .select__list {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-.content-list .UI-kit__container .select__backdrop {
+.content-list .content-list__page .UI-kit__container .select__backdrop {
   position: fixed;
   display: none;
   z-index: -1;
@@ -848,19 +850,33 @@ header .btn {
   bottom: 0;
   background: transparent;
 }
-.content-list .UI-kit__container .select__item {
+.content-list .content-list__page .UI-kit__container .select__item {
   padding: 1rem;
   border-bottom: 1px solid #ccc;
 }
-.content-list .UI-kit__container .select__item.selected {
+.content-list .content-list__page .UI-kit__container .select__item.selected {
   background-color: var(--blue-color);
 }
-.content-list .UI-kit__container .select__item:hover {
+.content-list .content-list__page .UI-kit__container .select__item:hover {
   background-color: var(--blue-color);
   cursor: pointer;
   -webkit-transition: 0.15s background-color ease-in;
   -o-transition: 0.15s background-color ease-in;
   transition: 0.15s background-color ease-in;
+}
+.content-list .content-list__page .UI-kit__container .select .fa-chevron-down {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 10px 7.5px 0 7.5px;
+  border-color: var(--blue-color) transparent transparent transparent;
+}
+.content-list .content-list__page .UI-kit__container .select .fa-chevron-up {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 7.5px 10px 7.5px;
+  border-color: transparent transparent var(--blue-color) transparent;
 }
 .content-list .content-list__page_active {
   display: block;
